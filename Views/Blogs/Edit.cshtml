@@ -1,0 +1,65 @@
+﻿@model TheBlogProject.Models.Blog
+@using Microsoft.AspNetCore.Identity
+@using TheBlogProject.Enums
+@inject UserManager<BlogUser> _userManager
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Blog</h4>
+<hr />
+<div class="container mb-2">
+    @if (User.IsInRole(BlogRole.Administrator.ToString()))
+    {
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-sm shadow-sm rounded-2 btn-outline-danger float-end" asp-controller="Blogs" asp-action="Delete" asp-route-id="@Model.Id">Delete Blog</a>
+            </div>
+        </div>
+
+
+    }
+</div>
+<div class="container d-flex justify-content-center bg-light rounded-2 p-4 shadow border">
+    <div class="row  w-100">
+        <div class="col-12">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group mb-1">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control rounded-2" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-1">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control rounded-2"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group mb-2">
+                    <label asp-for="Image" class="control-label"></label>
+                    <input type="file" name="NewImage" class="form-control rounded-2" accept=".jpg,.png,.gif,.jpeg" />
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary rounded-2 shadow-sm" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="m-3">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-sm shadow-sm rounded-2 btn-outline-danger"><< Back to Blogs</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

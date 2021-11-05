@@ -1,0 +1,120 @@
+﻿@using TheBlogProject.Enums
+@model TheBlogProject.Models.Post
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<div class="ms-2">
+    <h1>Create</h1>
+
+    <h4>Post</h4>
+</div>
+
+
+<hr />
+<div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BlogId" class="control-label"></label>
+                <select asp-for="BlogId" class="form-select rounded-2" asp-items="ViewBag.BlogId"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control rounded-2" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Abstract" class="control-label"></label>
+                <textarea asp-for="Abstract" class="form-control rounded-2"></textarea>
+                <span asp-validation-for="Abstract" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea asp-for="Content" class="form-control rounded-2"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="form-group col-12 col-mg-6">
+                    <label asp-for="Image" class="control-label"></label>
+                    <input type="file" asp-for="Image" class="form-control rounded-2" />
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+
+                <div class="form-group p-3">
+
+                    <div class="row mt-2 bg-light p-3 rounded-2 border  row-cols-1 row-cols-md-2 gy-2">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="control-label">Manage Tags</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col ">
+                                    <input type="text" class="form-control rounded-2" id="TagEntry" />
+                                </div>
+                            </div>
+                            <div class="row mt-2 ">
+                                <div class="col d-flex align-items-center justify-content-center">
+                                    <button onclick="AddTag()" name="Add" type="button" class="btn btn-dark w-75 btn-sm rounded-2">Add</button>
+                                </div>
+                                <div class="col d-flex align-items-center justify-content-center">
+                                    <button onclick="DeleteTag()" name="Delete" type="button" class="btn btn-dark w-75 btn-sm rounded-2">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <select class="w-100 rounded-2" name="TagValues" id="TagList" multiple></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="ReadyStatus" class="control-label"></label>
+                    <select asp-for="ReadyStatus" asp-items="@Html.GetEnumSelectList<ReadyStatus>()" class="form-select rounded-2"></select>
+                    <span asp-validation-for="ReadyStatus" class="text-danger "></span>
+                </div>
+            </div>
+            <div class="form-group mt-2 col-md-6 d-flex justify-content-center">
+                <button type="submit" class="btn btn-sm btn-dark rounded-2 w-75 fs-5">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="ms-2">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+
+
+
+    <script>
+        let tagValues = "@ViewData["TagValues"]";
+
+        $('#Content').summernote({
+            placeholder: 'Post Body',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    </script>
+    <!--my custom javascript-->
+    <script src="~/js/Custom.js"></script>
+
+}

@@ -1,0 +1,64 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container mt-3 mb-3">
+    <div class="row d-flex justify-content-center ">
+        <div class="col-12 col-md-8">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data" class="rounded-3 p-3 bg-light shadow-sm border">
+                <h4>Create a new account.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Input.FirstName"></label>
+                    <input asp-for="Input.FirstName" class="form-control rounded-2" />
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.LastName"></label>
+                    <input asp-for="Input.LastName" class="form-control rounded-2" />
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control rounded-2" />
+                    <span asp-validation-for="Input.Email" class="text-danger "></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" asp-for="Input.ImageFile"></label>
+                    <input type="file" asp-for="Input.ImageFile" class="form-control rounded-2" accept=".png, .jpg, .jpeg, .bmp, .tif, .gif" />
+                    <span asp-validation-for="Input.ImageFile" class="text-danger"></span>
+                </div>
+
+                @*<div class="form-group mt-2">
+                        <label class="btn btn-primary form-label rounded-2" asp-for="Input.ImageFile">
+                            <i class="fa fa-image "></i>Browse for a Custom Image<input type="file" style="display: none;" asp-for="Input.ImageFile" class="">
+                            <span asp-validation-for="Input.ImageFile" class="text-danger"></span>
+                        </label>
+                    </div>*@
+
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control rounded-2" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword"></label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control rounded-2" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary rounded-2 mt-2 mb-2 shadow-sm">Register</button>
+            </form>
+        </div>       
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
